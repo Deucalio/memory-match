@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @font-face {
+            font-family: halloweenFont;
+            src: url("./Slime and Blood.ttf");
+        }
+
+        body {
+            font-family: halloweenFont, 'Times New Roman', Times, serif;
+        }
+
+        body {
+            background-color: #2D132C;
+        }
+    </style>
+</head>
+
+<body class="">
+
+    <div class="flex flex-wrap gap-4 justify-center items-center mt-6">
+        <h1 class="text-[#EE4540] text-3xl md:text-6xl text-center leading-loose">Memory Match</h1>
+        <img class="h-[4.5rem] mb-2" src="https://cdn-icons-png.flaticon.com/512/8787/8787419.png" alt="">
+    </div>
+    <div class="grid grid-cols-3  x-gap-8 place-items-center mt-8 md:w-2/4 mx-auto">
+        <p class="text-[#C72C41] text-3xl  ">0</p>
+        <button
+            class="p-2 w-fit text-[#2D132C]  rounded-lg text-2xl transition-all bg-[#EE4540]/75 hover:bg-[#EE4540]/90 row-span-2">Restart</button>
+        <p class="text-[#C72C41] text-3xl  ">0</p>
+        <p class="text-[#C72C41] text-2xl ">Matches</p>
+
+        <p class="text-[#C72C41] text-2xl col-start-3">Turns</p>
+    </div>
+</body>
+
+
+
+</html>
