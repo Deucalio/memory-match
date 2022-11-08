@@ -11,7 +11,7 @@ const Main = () => {
           alt=""
         />
       </div>
-      <div className="x-gap-8 mx-auto mt-8 grid grid-cols-3 place-items-center md:w-2/4">
+      <div className="x-gap-8 mx-auto mt-4 grid grid-cols-3 place-items-center md:w-2/4">
         <p className="text-3xl text-[#C72C41]">0</p>
         <button className="row-span-2 w-fit rounded-lg bg-[#EE4540]/75 p-2 text-2xl text-[#2D132C] transition-all hover:bg-[#EE4540]/90">
           Restart
