@@ -1,36 +1,7 @@
-import React, { useEffect, useState, useRef,  } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 
-const Overlay = ({ turns, matchesList}) => {
-  const [isActive, setIsActive] = useState(false);
-  const [boolList, setboolList] = useState(matchesList);
-
-  useEffect(() => {
-    const check = () => {
-      if (boolList.every((b) => b === true)) {
-        setIsActive(true);
-
-        setTimeout(() => {
-          setboolList(boolList.map((b) => (b = false)));
-        }, 3500);
-      } else {
-        setIsActive(false);
-      }
-    };
-    check();
-  });
-
-  return (
-    <>
-      <div action="#" className="pop-up" id="modal"></div>
-      <div
-        id="overlay"
-        data-content={`You won after ${turns} tries`}
-        className={`${
-          isActive ? "active" : ""
-        } transition duration-[2000ms] text-center before:text-[#E66B09] w-full block backdrop-blur-md before:relative inset-0 fixed  before:top-1/2  before:content-[''] before:text-5xl `}
-      ></div>
-    </>
-  );
+const Overlay = ({ turns, matchesList }) => {
+  return <></>;
 };
 
 const Cards = () => {
@@ -84,6 +55,25 @@ const Cards = () => {
     false,
   ]);
 
+  // overlay stuff
+  const [isActive, setIsActive] = useState(false);
+  const [boolList, setBoolList] = useState(isMatch);
+
+  useEffect(() => {
+    const check = () => {
+      if (boolList.every((b) => b === true)) {
+        setIsActive(true);
+
+        setTimeout(() => {
+          setBoolList(boolList.map((b) => (b = false)));
+        }, 3500);
+      } else {
+        setIsActive(false);
+      }
+    };
+    check();
+  });
+
   const ref = useRef(null);
 
   const getImgSrc = (div) =>
@@ -125,6 +115,7 @@ const Cards = () => {
       }
     };
     matchCard();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clickedCards]);
 
   const flipCard = (clickedCard) => {
@@ -164,6 +155,10 @@ const Cards = () => {
     const Cards = [...cardWrapper.children].map((d) => d.children[1]);
     Cards.map((card) => card.classList.remove("match"));
   };
+
+  useEffect(() => {
+    setBoolList(isMatch);
+  }, [isMatch]);
   return (
     <>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
@@ -436,7 +431,15 @@ const Cards = () => {
           ></div>
         </div>
       </div>
-      <Overlay matchesList={isMatch} turns={turns} />
+
+      <div action="#" className="pop-up" id="modal"></div>
+      <div
+        id="overlay"
+        data-content={`You won after ${turns} tries`}
+        className={`${
+          isActive ? "active" : ""
+        } transition duration-[2000ms] text-center before:text-[#E66B09] w-full block backdrop-blur-md before:relative inset-0 fixed  before:top-1/2  before:content-[''] before:text-5xl `}
+      ></div>
     </>
   );
 };
