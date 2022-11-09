@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef,  } from "react";
 
-const Overlay = ({ turns, matchesList }) => {
+const Overlay = ({ turns, matchesList}) => {
   const [isActive, setIsActive] = useState(false);
+  const [boolList, setboolList] = useState(matchesList);
 
   useEffect(() => {
-    const makeActive = () => {
-      matchesList.every((b) => b === true) ? setIsActive(true) : setIsActive(false)
-      setTimeout(() => {
-        setIsActive(false)
-      },700)
+    const check = () => {
+      if (boolList.every((b) => b === true)) {
+        setIsActive(true);
+
+        setTimeout(() => {
+          setboolList(boolList.map((b) => (b = false)));
+        }, 3500);
+      } else {
+        setIsActive(false);
+      }
     };
-    makeActive()
+    check();
   });
 
   return (
@@ -21,7 +27,7 @@ const Overlay = ({ turns, matchesList }) => {
         data-content={`You won after ${turns} tries`}
         className={`${
           isActive ? "active" : ""
-        } transition duration-[2000] text-center before:text-[#E66B09] w-full block backdrop-blur-md before:relative inset-0 fixed  before:top-1/2  before:content-[''] before:text-5xl `}
+        } transition duration-[2000ms] text-center before:text-[#E66B09] w-full block backdrop-blur-md before:relative inset-0 fixed  before:top-1/2  before:content-[''] before:text-5xl `}
       ></div>
     </>
   );
@@ -77,6 +83,8 @@ const Cards = () => {
     false,
     false,
   ]);
+
+  const ref = useRef(null);
 
   const getImgSrc = (div) =>
     div.style.backgroundImage.slice(13, div.style.backgroundImage.length - 2);
@@ -144,6 +152,18 @@ const Cards = () => {
 
     flipCard(clickedBtn);
   };
+
+  const restartGame = () => {
+    setIsMatch(isMatch.map((b) => (b = false)));
+    setIndexes(shuffleArray());
+
+    setMatches(0);
+    setTurns(0);
+
+    const cardWrapper = ref.current;
+    const Cards = [...cardWrapper.children].map((d) => d.children[1]);
+    Cards.map((card) => card.classList.remove("match"));
+  };
   return (
     <>
       <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
@@ -158,14 +178,20 @@ const Cards = () => {
       </div>
       <div className="x-gap-8 mx-auto mt-4 grid grid-cols-3 place-items-center md:w-2/4">
         <p className="text-3xl text-[#C72C41]">{matches}</p>
-        <button className="row-span-2 w-fit rounded-lg bg-[#EE4540]/75 p-2 text-2xl text-[#2D132C] transition-all hover:bg-[#EE4540]/90">
+        <button
+          onClick={restartGame}
+          className="row-span-2 w-fit rounded-lg bg-[#EE4540]/75 p-2 text-2xl text-[#2D132C] transition-all hover:bg-[#EE4540]/90"
+        >
           Restart
         </button>
         <p className="text-3xl text-[#C72C41]">{turns}</p>
         <p className="text-2xl text-[#C72C41]">Matches</p>
         <p className="col-start-3 text-2xl text-[#C72C41]">Turns</p>
       </div>
-      <div className="card-wrapper xl:x-gap-1 container mx-auto grid grid-cols-4 gap-2 px-4 mt-2 md:w-5/6 lg:y-gap-2 lg:px-36">
+      <div
+        ref={ref}
+        className="card-wrapper xl:x-gap-1 container mx-auto grid grid-cols-4 gap-2 px-4 mt-2 md:w-5/6 lg:y-gap-2 lg:px-36"
+      >
         <div
           id="0"
           onClick={handleClick}
