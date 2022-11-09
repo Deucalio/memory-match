@@ -1,3 +1,4 @@
+import { click } from "@testing-library/user-event/dist/click";
 import React, { useEffect, useState } from "react";
 
 const Cards = () => {
@@ -32,6 +33,25 @@ const Cards = () => {
   const [matches, setMatches] = useState(0);
   const [turns, setTurns] = useState(0);
 
+  const [isMatch, setIsMatch] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
   const getImgSrc = (div) =>
     div.style.backgroundImage.slice(13, div.style.backgroundImage.length - 2);
 
@@ -48,6 +68,9 @@ const Cards = () => {
         }, 2000);
       }
       if (clickedCards.length >= 2) {
+        const card1_ID = Number(clickedCards[0].id);
+        const card2_ID = Number(clickedCards[1].id);
+
         setCardDisabled(true);
         setTurns(turns + 1);
 
@@ -56,6 +79,10 @@ const Cards = () => {
 
         if (getImgSrc(card1) === getImgSrc(card2)) {
           setMatches((m) => m + 1);
+
+          isMatch[card1_ID] = true;
+          isMatch[card2_ID] = true;
+
           card1.classList.add("match");
           card2.classList.add("match");
         }
@@ -114,10 +141,11 @@ const Cards = () => {
       </div>
       <div className="card-wrapper xl:x-gap-1 container mx-auto grid grid-cols-4 gap-2 px-4 mt-2 md:w-5/6 lg:y-gap-2 lg:px-36">
         <div
+          id="0"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[0] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -128,10 +156,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="1"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[1] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -142,10 +171,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="2"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[2] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -156,10 +186,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="3"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[3] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -171,10 +202,11 @@ const Cards = () => {
         </div>
 
         <div
+          id="4"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[4] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -185,10 +217,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="5"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[5] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -199,10 +232,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="6"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[6] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -213,10 +247,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="7"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[7] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -228,10 +263,11 @@ const Cards = () => {
         </div>
 
         <div
+          id="8"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[8] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -242,10 +278,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="9"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[9] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -256,10 +293,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="10"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[10] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -270,10 +308,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="11"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[11] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -285,10 +324,11 @@ const Cards = () => {
         </div>
 
         <div
+          id="12"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[12] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -299,10 +339,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="13"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[13] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -313,10 +354,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="14"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[14] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
@@ -327,10 +369,11 @@ const Cards = () => {
           ></div>
         </div>
         <div
+          id="15"
           onClick={handleClick}
           className={`card h-28 xl:w-44 cursor-pointer ${
             cardDisabled ? "pointer-events-none" : ""
-          }`}
+          } ${isMatch[15] ? "match" : ""}`}
         >
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div

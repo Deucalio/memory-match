@@ -50,7 +50,9 @@
     padding: 1em 0;
   }
 
-  div.match
+  div.match.card {
+    pointer-events: none !important;
+  }
 
   div.match.card__side--front-1 {
     transform: rotateY(180deg) !important;
