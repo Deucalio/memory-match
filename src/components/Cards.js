@@ -27,16 +27,38 @@ const Cards = () => {
 
   const [clickedCards, setClickedCards] = useState([]);
   const [cardDisabled, setCardDisabled] = useState(false);
-  const [Images, setImages] = useState([]);
   const [Indexes, setIndexes] = useState(shuffleArray());
 
+  const [matches, setMatches] = useState(0);
+  const [turns, setTurns] = useState(0);
+
+  const getImgSrc = (div) =>
+    div.style.backgroundImage.slice(13, div.style.backgroundImage.length - 2);
 
   useEffect(() => {
     const matchCard = () => {
-      const [card1, card2] = clickedCards;
+      let [card1, card2] = clickedCards;
+
+      // disable parent card right after click then remove the effect
+      if (clickedCards.length === 1) {
+        card1.classList.add("pointer-events-none");
+
+        setTimeout(() => {
+          card1.classList.remove("pointer-events-none");
+        }, 2000);
+      }
       if (clickedCards.length >= 2) {
         setCardDisabled(true);
-        console.log(card1, "\n", card2);
+        setTurns(turns + 1);
+
+        card1 = card1.children[1];
+        card2 = card2.children[1];
+
+        if (getImgSrc(card1) === getImgSrc(card2)) {
+          setMatches((m) => m + 1);
+          card1.classList.add("match");
+          card2.classList.add("match");
+        }
       } else {
         return "no card";
       }
@@ -56,163 +78,270 @@ const Cards = () => {
       backCard.style.transform = "";
       setClickedCards([]);
       setCardDisabled(false);
-    }, 2000);
+    }, 1200);
   };
 
   const handleClick = (e) => {
     const clickedBtn = e.target.parentElement;
+
+    // clickedBtn.classList.add("pointer-events-none");
+    // setTimeout(() => {
+    // clickedBtn.classList.remove("pointer-events-none");
+    // },1200)
+
     flipCard(clickedBtn);
   };
   return (
-    <div className="card-wrapper xl:x-gap-1 container mx-auto grid grid-cols-4 gap-2 px-4 mt-2 md:w-5/6 lg:y-gap-2 lg:px-36">
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[0]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
+    <>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+        <h1 className="text-center text-3xl leading-loose text-[#EE4540] md:text-6xl">
+          Memory Match
+        </h1>
+        <img
+          className="mb-2 h-[4.5rem]"
+          src="https://cdn-icons-png.flaticon.com/512/8787/8787419.png"
+          alt=""
+        />
       </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[1]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
+      <div className="x-gap-8 mx-auto mt-4 grid grid-cols-3 place-items-center md:w-2/4">
+        <p className="text-3xl text-[#C72C41]">{matches}</p>
+        <button className="row-span-2 w-fit rounded-lg bg-[#EE4540]/75 p-2 text-2xl text-[#2D132C] transition-all hover:bg-[#EE4540]/90">
+          Restart
+        </button>
+        <p className="text-3xl text-[#C72C41]">{turns}</p>
+        <p className="text-2xl text-[#C72C41]">Matches</p>
+        <p className="col-start-3 text-2xl text-[#C72C41]">Turns</p>
       </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[2]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[3]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
+      <div className="card-wrapper xl:x-gap-1 container mx-auto grid grid-cols-4 gap-2 px-4 mt-2 md:w-5/6 lg:y-gap-2 lg:px-36">
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[0]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[1]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[2]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[3]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
 
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[4]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[5]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[6]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[7]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[4]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[5]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[6]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[7]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
 
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[8]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[9]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[10]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[11]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[8]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[9]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[10]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[11]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
 
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[12]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[12]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[13]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[14]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
+        <div
+          onClick={handleClick}
+          className={`card h-28 xl:w-44 cursor-pointer ${
+            cardDisabled ? "pointer-events-none" : ""
+          }`}
+        >
+          <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
+          <div
+            style={{
+              backgroundImage: `url(/images/${ImagesList[Indexes[15]]}.jpg)`,
+            }}
+            className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
+          ></div>
+        </div>
       </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[13]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[14]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-      <div
-        onClick={handleClick}
-        className={`card h-28 xl:w-44 cursor-pointer ${
-          cardDisabled ? "pointer-events-none" : ""
-        }`}
-      >
-        <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
-        <div style={{backgroundImage: `url(/images/${ImagesList[Indexes[15]]}.jpg)`}} className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"></div>
-      </div>
-    </div>
+    </>
   );
 };
 
