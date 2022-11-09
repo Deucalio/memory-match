@@ -60,4 +60,20 @@
   div.match.card__side--back-1 {
     transform: rotate(0) !important;
   }
+
+  #overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #overlay::before {
+    content: attr(data-content);
+    color: #E66B09;
+  }
+
+  #overlay.active {
+    opacity: 1;
+    pointer-events: all;
+
+  }
 }

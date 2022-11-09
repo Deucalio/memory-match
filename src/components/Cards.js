@@ -1,5 +1,31 @@
-import { click } from "@testing-library/user-event/dist/click";
 import React, { useEffect, useState } from "react";
+
+const Overlay = ({ turns, matchesList }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const makeActive = () => {
+      matchesList.every((b) => b === true) ? setIsActive(true) : setIsActive(false)
+      setTimeout(() => {
+        setIsActive(false)
+      },700)
+    };
+    makeActive()
+  });
+
+  return (
+    <>
+      <div action="#" className="pop-up" id="modal"></div>
+      <div
+        id="overlay"
+        data-content={`You won after ${turns} tries`}
+        className={`${
+          isActive ? "active" : ""
+        } transition duration-[2000] text-center before:text-[#E66B09] w-full block backdrop-blur-md before:relative inset-0 fixed  before:top-1/2  before:content-[''] before:text-5xl `}
+      ></div>
+    </>
+  );
+};
 
 const Cards = () => {
   /* Randomize array in-place using Durstenfeld shuffle algorithm */
@@ -384,6 +410,7 @@ const Cards = () => {
           ></div>
         </div>
       </div>
+      <Overlay matchesList={isMatch} turns={turns} />
     </>
   );
 };
