@@ -233,7 +233,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(.${ImagesList[Indexes[2]]})`,
+              backgroundImage: `url(${ImagesList[Indexes[2]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
