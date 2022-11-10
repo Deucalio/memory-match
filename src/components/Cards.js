@@ -1,8 +1,13 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import frogies from "../images/frogies.jpg";
+import settledSkeleton from "../images/settledSkeleton.jpg";
+import teddy from "../images/teddy.jpg";
+import trickNTreat from "../images/trickNTreat.jpg";
+import unsettledSkeleton from "../images/unsettledSkeleton.jpg";
+import vampireQueen from "../images/vampireQueen.jpg";
+import venomSpiderMan from "../images/venomSpiderMan.jpg";
+import wholesomeSpiderMan from "../images/wholesomeSpiderMan.jpg";
 
-const Overlay = ({ turns, matchesList }) => {
-  return <></>;
-};
+import React, { useEffect, useState, useRef } from "react";
 
 const Cards = () => {
   /* Randomize array in-place using Durstenfeld shuffle algorithm */
@@ -19,14 +24,14 @@ const Cards = () => {
   };
 
   const ImagesList = [
-    "frogies",
-    "settledSkeleton",
-    "teddy",
-    "trickNTreat",
-    "UnsettledSkeleton",
-    "vampireQueen",
-    "venomSpiderMan",
-    "wholesomeSpiderMan",
+    frogies,
+    settledSkeleton,
+    teddy,
+    trickNTreat,
+    unsettledSkeleton,
+    vampireQueen,
+    venomSpiderMan,
+    wholesomeSpiderMan,
   ];
 
   const [clickedCards, setClickedCards] = useState([]);
@@ -76,8 +81,9 @@ const Cards = () => {
 
   const ref = useRef(null);
 
-  const getImgSrc = (div) =>
-    div.style.backgroundImage.slice(13, div.style.backgroundImage.length - 2);
+  const getImgSrc = (div) => {
+    return Indexes[div.parentElement.id];
+  };
 
   useEffect(() => {
     const matchCard = () => {
@@ -115,7 +121,7 @@ const Cards = () => {
       }
     };
     matchCard();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clickedCards]);
 
   const flipCard = (clickedCard) => {
@@ -197,7 +203,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[0]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[0]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -212,7 +218,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[1]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[1]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -227,7 +233,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[2]]}.jpg)`,
+              backgroundImage: `url(.${ImagesList[Indexes[2]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -242,7 +248,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[3]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[3]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -258,7 +264,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[4]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[4]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -273,7 +279,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[5]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[5]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -288,7 +294,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[6]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[6]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -303,7 +309,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[7]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[7]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -319,7 +325,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[8]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[8]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -334,7 +340,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[9]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[9]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -349,7 +355,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[10]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[10]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -364,7 +370,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[11]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[11]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -380,7 +386,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[12]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[12]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -395,7 +401,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[13]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[13]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -410,7 +416,7 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[14]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[14]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
@@ -425,14 +431,13 @@ const Cards = () => {
           <div className="card__side card__side--front card__side--front-1 h-full rounded-lg bg-cover bg-center"></div>
           <div
             style={{
-              backgroundImage: `url(/images/${ImagesList[Indexes[15]]}.jpg)`,
+              backgroundImage: `url(${ImagesList[Indexes[15]]})`,
             }}
             className="card__side card__side--back card__side--back-1 h-full rounded-lg bg-cover bg-center"
           ></div>
         </div>
       </div>
 
-      <div action="#" className="pop-up" id="modal"></div>
       <div
         id="overlay"
         data-content={`You won after ${turns} tries`}
