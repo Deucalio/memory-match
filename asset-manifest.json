@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/memory-match/static/css/main.8f9f1f7a.css",
+    "main.js": "/memory-match/static/js/main.e885e516.js",
+    "static/media/Slime and Blood.ttf": "/memory-match/static/media/Slime and Blood.ef1c5ee0af812c8dc076.ttf",
+    "index.html": "/memory-match/index.html",
+    "main.8f9f1f7a.css.map": "/memory-match/static/css/main.8f9f1f7a.css.map",
+    "main.e885e516.js.map": "/memory-match/static/js/main.e885e516.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f9f1f7a.css",
+    "static/js/main.e885e516.js"
+  ]
+}
