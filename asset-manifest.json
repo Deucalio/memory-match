@@ -1,14 +1,22 @@
 {
   "files": {
-    "main.css": "/memory-match/static/css/main.8f9f1f7a.css",
-    "main.js": "/memory-match/static/js/main.e885e516.js",
+    "main.css": "/memory-match/static/css/main.0d6768d5.css",
+    "main.js": "/memory-match/static/js/main.a27949af.js",
     "static/media/Slime and Blood.ttf": "/memory-match/static/media/Slime and Blood.ef1c5ee0af812c8dc076.ttf",
+    "static/media/teddy.jpg": "/memory-match/static/media/teddy.4d502fa7a7334aa5dd29.jpg",
+    "static/media/venomSpiderMan.jpg": "/memory-match/static/media/venomSpiderMan.c49a6e60c5d2e2809551.jpg",
+    "static/media/frogies.jpg": "/memory-match/static/media/frogies.1756b654dd7454c5debb.jpg",
+    "static/media/vampireQueen.jpg": "/memory-match/static/media/vampireQueen.1d2874e641f7828d8fdf.jpg",
+    "static/media/wholesomeSpiderMan.jpg": "/memory-match/static/media/wholesomeSpiderMan.822b3a67771d9a338b9f.jpg",
+    "static/media/trickNTreat.jpg": "/memory-match/static/media/trickNTreat.ecd41aee145bb9147201.jpg",
+    "static/media/settledSkeleton.jpg": "/memory-match/static/media/settledSkeleton.7f993e1b153f529dc473.jpg",
+    "static/media/unsettledSkeleton.jpg": "/memory-match/static/media/unsettledSkeleton.e66c499c9f0fcf2309f4.jpg",
     "index.html": "/memory-match/index.html",
-    "main.8f9f1f7a.css.map": "/memory-match/static/css/main.8f9f1f7a.css.map",
-    "main.e885e516.js.map": "/memory-match/static/js/main.e885e516.js.map"
+    "main.0d6768d5.css.map": "/memory-match/static/css/main.0d6768d5.css.map",
+    "main.a27949af.js.map": "/memory-match/static/js/main.a27949af.js.map"
   },
   "entrypoints": [
-    "static/css/main.8f9f1f7a.css",
-    "static/js/main.e885e516.js"
+    "static/css/main.0d6768d5.css",
+    "static/js/main.a27949af.js"
   ]
 }
