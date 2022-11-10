@@ -4,7 +4,7 @@
 
 ##[Play Game](https://deucalio.github.io/memory-match/)
 
-##About Game:
+## About Game:
 Flip cards and match the same pair of images. This game is made with react and styling is done mostly with tailwindCSS, I set it all up in react using hooks.
 - **Cards are shuffled if game restarts.**
 - **You can flip two cards at a time.**
