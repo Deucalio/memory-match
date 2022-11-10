@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/memory-match/static/css/main.0d6768d5.css",
-    "main.js": "/memory-match/static/js/main.a27949af.js",
+    "main.js": "/memory-match/static/js/main.f12f210a.js",
     "static/media/Slime and Blood.ttf": "/memory-match/static/media/Slime and Blood.ef1c5ee0af812c8dc076.ttf",
     "static/media/teddy.jpg": "/memory-match/static/media/teddy.4d502fa7a7334aa5dd29.jpg",
     "static/media/venomSpiderMan.jpg": "/memory-match/static/media/venomSpiderMan.c49a6e60c5d2e2809551.jpg",
@@ -13,10 +13,10 @@
     "static/media/unsettledSkeleton.jpg": "/memory-match/static/media/unsettledSkeleton.e66c499c9f0fcf2309f4.jpg",
     "index.html": "/memory-match/index.html",
     "main.0d6768d5.css.map": "/memory-match/static/css/main.0d6768d5.css.map",
-    "main.a27949af.js.map": "/memory-match/static/js/main.a27949af.js.map"
+    "main.f12f210a.js.map": "/memory-match/static/js/main.f12f210a.js.map"
   },
   "entrypoints": [
     "static/css/main.0d6768d5.css",
-    "static/js/main.a27949af.js"
+    "static/js/main.f12f210a.js"
   ]
 }
